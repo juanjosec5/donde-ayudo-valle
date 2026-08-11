@@ -15,6 +15,11 @@
       ·
       <a href="https://www.cruzrojacolombiana.org" target="_blank" rel="noopener">cruzrojacolombiana.org</a>
     </p>
+
+    <p class="independencia">
+      Proyecto independiente creado por un ciudadano. Sin relación con ninguna entidad
+      gubernamental.
+    </p>
   </footer>
 </template>
 
@@ -46,5 +51,12 @@
 
 .rfl a {
   color: var(--color-acento);
+}
+
+.independencia {
+  margin: var(--espacio-sm) 0 0;
+  padding-top: var(--espacio-sm);
+  border-top: 1px solid var(--color-borde);
+  font-size: 0.75rem;
 }
 </style>
