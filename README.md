@@ -45,7 +45,11 @@ commit real de un archivo que lleva un tiempo sin tocarse.
 
 ## Deploy en Vercel
 
-El proyecto usa el preset de Vite por defecto, sin configuración adicional.
+El proyecto usa el preset de Vite por defecto. La única configuración extra es
+`vercel.json`, que reescribe todas las rutas hacia `index.html` — necesario porque
+`vue-router` usa el modo historial (URLs limpias como `/cali`, sin `#`), y sin ese
+rewrite Vercel devuelve un 404 real al entrar directo a cualquier ruta que no sea `/`
+(solo el cliente, ya cargado, sabe resolver esas rutas). No borrar ese archivo.
 
 1. Sube el repo a GitHub (u otro proveedor soportado por Vercel).
 2. En Vercel: **New Project** → importa el repo.
