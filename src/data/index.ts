@@ -10,6 +10,7 @@ import { rozo } from './puntos/rozo'
 import { laUnion } from './puntos/laUnion'
 import { bogota } from './puntos/bogota'
 import { tulua } from './puntos/tulua'
+import { trujillo } from './puntos/trujillo'
 
 // "actualizado" se estampa con la fecha/hora real por un hook pre-commit
 // (scripts/stamp-actualizado.js) cada vez que se modifica un archivo de
@@ -25,6 +26,7 @@ export const puntos: PuntoAcopio[] = [
   ...laUnion,
   ...bogota,
   ...tulua,
+  ...trujillo,
 ]
 
 export function puntosPorMunicipio(slug: string): PuntoAcopio[] {

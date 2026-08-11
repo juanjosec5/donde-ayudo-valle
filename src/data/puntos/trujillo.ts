@@ -1,13 +1,13 @@
 import type { PuntoAcopio } from '@/types'
 import { necesidadesGenericas } from '../necesidadesGenericas'
 
-export const tulua: PuntoAcopio[] = [
+export const trujillo: PuntoAcopio[] = [
   {
-    id: 'tulua-plaza-civica-boyaca',
-    nombre: 'Plaza Cívica Boyacá',
-    municipioSlug: 'tulua',
-    direccion: 'Parque entre la Calle 26 con Carrera 25',
-    barrio: 'Centro',
+    id: 'trujillo-centro-temporal-los-olmos',
+    nombre: 'Centro Temporal de Acopio',
+    municipioSlug: 'trujillo',
+    direccion: 'Calle 20 #12B-21',
+    barrio: 'Los Olmos',
     horario: 'Sin horario definido',
     contactos: [],
     necesita: necesidadesGenericas,
@@ -16,11 +16,12 @@ export const tulua: PuntoAcopio[] = [
     activo: true,
   },
   {
-    id: 'tulua-casa-cepeda',
-    nombre: 'Casa Cepeda',
-    municipioSlug: 'tulua',
-    direccion: 'Calle 24 #25-03',
-    horario: '9:00 a.m. – 12:00 p.m. y 2:00 p.m. – 6:00 p.m.',
+    id: 'trujillo-centro-temporal-el-jazmin',
+    nombre: 'Centro Temporal de Acopio',
+    municipioSlug: 'trujillo',
+    direccion: 'Calle 28A1 #42-40',
+    barrio: 'El Jazmín',
+    horario: 'Sin horario definido',
     contactos: [],
     necesita: necesidadesGenericas,
     actualizado: '2026-08-11T20:44:37.463Z',
