@@ -40,5 +40,4 @@ export interface PuntoAcopio {
 export interface Municipio {
   slug: string // "buga"
   nombre: string // "Buga (Guadalajara de Buga)"
-  avisoVoluntarios?: string[] // recomendaciones para quienes van a ayudar en sitio
 }

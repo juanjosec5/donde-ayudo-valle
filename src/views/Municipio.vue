@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { puntosPorMunicipio, municipios } from '@/data'
+import { avisoVoluntarios } from '@/data/avisoVoluntarios'
 import PuntoCard from '@/components/PuntoCard.vue'
 import CategoriaFiltro from '@/components/CategoriaFiltro.vue'
 import type { CategoriaItem } from '@/types'
@@ -25,10 +26,10 @@ const puntosFiltrados = computed(() => {
     <RouterLink to="/" class="volver">← Municipios</RouterLink>
     <h1>{{ municipio?.nombre ?? slug }}</h1>
 
-    <div v-if="municipio?.avisoVoluntarios?.length" class="aviso-voluntarios">
+    <div class="aviso-voluntarios">
       <p class="aviso-titulo">Antes de ir a ayudar</p>
       <ul>
-        <li v-for="(linea, i) in municipio.avisoVoluntarios" :key="i">{{ linea }}</li>
+        <li v-for="(linea, i) in avisoVoluntarios" :key="i">{{ linea }}</li>
       </ul>
     </div>
 
@@ -60,8 +61,8 @@ const puntosFiltrados = computed(() => {
 }
 
 .aviso-voluntarios {
-  background: color-mix(in srgb, var(--urg-media) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--urg-media) 35%, transparent);
+  background: color-mix(in srgb, var(--color-acento) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-acento) 30%, transparent);
   border-radius: var(--radio);
   padding: var(--espacio-md);
   margin: var(--espacio-md) 0;
@@ -70,7 +71,7 @@ const puntosFiltrados = computed(() => {
 .aviso-titulo {
   margin: 0 0 var(--espacio-xs);
   font-weight: 700;
-  color: var(--urg-media);
+  color: var(--color-acento);
 }
 
 .aviso-voluntarios ul {
