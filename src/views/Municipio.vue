@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { puntosPorMunicipio, municipios } from '@/data'
 import { avisoVoluntarios } from '@/data/avisoVoluntarios'
@@ -10,6 +10,19 @@ const slug = computed(() => route.params.municipioSlug as string)
 const municipio = computed(() => municipios.find((m) => m.slug === slug.value))
 
 const puntos = computed(() => puntosPorMunicipio(slug.value))
+
+const busqueda = ref('')
+watch(slug, () => {
+  busqueda.value = ''
+})
+
+const puntosFiltrados = computed(() => {
+  const q = busqueda.value.trim().toLowerCase()
+  if (!q) return puntos.value
+  return puntos.value.filter(
+    (p) => p.nombre.toLowerCase().includes(q) || p.direccion.toLowerCase().includes(q),
+  )
+})
 </script>
 
 <template>
@@ -24,9 +37,22 @@ const puntos = computed(() => puntosPorMunicipio(slug.value))
       </ul>
     </div>
 
-    <div v-if="puntos.length">
-      <PuntoCard v-for="punto in puntos" :key="punto.id" :punto="punto" />
+    <label v-if="puntos.length" class="buscador">
+      <span class="sr-only">Buscar por nombre o dirección</span>
+      <input
+        v-model="busqueda"
+        type="search"
+        placeholder="Buscar por nombre o dirección…"
+        aria-label="Buscar por nombre o dirección"
+      />
+    </label>
+
+    <div v-if="puntosFiltrados.length">
+      <PuntoCard v-for="punto in puntosFiltrados" :key="punto.id" :punto="punto" />
     </div>
+    <p v-else-if="puntos.length" class="estado-vacio">
+      No se encontraron puntos que coincidan con "{{ busqueda }}".
+    </p>
     <p v-else class="estado-vacio">
       Aún no hay puntos registrados en este municipio.
       <RouterLink to="/acerca">¿Conoces uno? Ver Cómo aportar</RouterLink>.
@@ -68,5 +94,31 @@ const puntos = computed(() => puntosPorMunicipio(slug.value))
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.buscador {
+  display: block;
+  margin: 0 0 var(--espacio-md);
+}
+
+.buscador input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 var(--espacio-md);
+  border-radius: var(--radio);
+  border: 1px solid var(--color-borde);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  font-size: 1rem;
+  box-shadow: var(--sombra-sm);
+  transition:
+    box-shadow 150ms ease,
+    border-color 150ms ease;
+}
+
+.buscador input:focus {
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px var(--color-acento-suave);
 }
 </style>
