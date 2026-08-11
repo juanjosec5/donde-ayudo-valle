@@ -63,4 +63,17 @@ export const cali: PuntoAcopio[] = [
     verificadoPor: undefined,
     activo: true,
   },
+  {
+    id: 'cali-tienda-baobab',
+    nombre: 'Tienda Baobab',
+    municipioSlug: 'cali',
+    direccion: 'Cl. 16 #103-10',
+    barrio: 'Ciudad Jardín',
+    horario: 'Sin horario definido',
+    contactos: [],
+    necesita: necesidadesGenericas,
+    actualizado: '2026-08-11',
+    verificadoPor: undefined,
+    activo: true,
+  },
 ]
