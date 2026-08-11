@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { municipiosConPuntos } from '@/data'
+import { FORMULARIO_URL } from '@/data/formularioUrl'
 import MunicipioList from '@/components/MunicipioList.vue'
 
 const busqueda = ref('')
@@ -27,6 +28,10 @@ const municipiosFiltrados = computed(() => {
       relación con ninguna entidad gubernamental, ONG, fundación u organización sin ánimo de
       lucro.
     </p>
+
+    <a :href="FORMULARIO_URL" target="_blank" rel="noopener" class="link-reportar">
+      ¿Conoces un punto de acopio? Repórtalo aquí →
+    </a>
 
     <label class="buscador">
       <span class="sr-only">Buscar municipio</span>
@@ -61,6 +66,16 @@ const municipiosFiltrados = computed(() => {
   border-radius: var(--radio);
   padding: var(--espacio-sm) var(--espacio-md);
   font-size: 0.85rem;
+}
+
+.link-reportar {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--espacio-sm);
+  color: var(--color-acento);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .buscador {

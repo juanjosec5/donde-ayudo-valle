@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { FORMULARIO_URL } from '@/data/formularioUrl'
+</script>
 
 <template>
   <section class="acerca">
@@ -37,12 +39,7 @@
     <p>
       Cuéntanos: dirección, barrio, horario, contacto y qué necesita con más urgencia.
     </p>
-    <a
-      href="https://docs.google.com/forms/d/e/1FAIpQLSfs-3P_U8HJc49bYZshCHPbUnExoRWtS_whB11XtF4XZ2OrSg/viewform?usp=header"
-      target="_blank"
-      rel="noopener"
-      class="btn-formulario"
-    >
+    <a :href="FORMULARIO_URL" target="_blank" rel="noopener" class="btn-formulario">
       Reportar un punto de acopio
     </a>
 
