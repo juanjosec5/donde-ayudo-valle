@@ -14,4 +14,16 @@ export const buga: PuntoAcopio[] = [
     verificadoPor: undefined,
     activo: true,
   },
+  {
+    id: 'buga-sede-defensa-civil',
+    nombre: 'Sede Defensa Civil',
+    municipioSlug: 'buga',
+    direccion: 'Calle 1 Sur #18-06',
+    horario: 'Sin horario definido',
+    contactos: [],
+    necesita: necesidadesGenericas,
+    actualizado: '2026-08-11',
+    verificadoPor: undefined,
+    activo: true,
+  },
 ]
