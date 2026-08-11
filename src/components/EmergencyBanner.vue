@@ -2,13 +2,17 @@
 
 <template>
   <div class="emergency-banner" role="alert">
+    <p class="lineas-numeros">
+      <strong>Emergencias: 123</strong> · Bomberos: 119 · Cruz Roja: 132 · Defensa Civil: 144 ·
+      Movilidad: 127
+    </p>
     <p class="linea-emergencia">
-      <strong>Emergencias: 123.</strong>
-      ¿Persona desaparecida?
-      <!-- TODO: confirmar enlace oficial de Cruz Roja Colombiana (RFL) antes de publicar -->
-      <a href="#TODO-cruzroja-rfl" target="_blank" rel="noopener">
-        Cruz Roja Colombiana – Restablecimiento del Contacto Familiar
-      </a>
+      ¿Persona desaparecida? Cruz Roja Colombiana – Restablecimiento del Contacto Familiar:
+      <a href="https://wa.me/573212139525" target="_blank" rel="noopener">WhatsApp</a>
+      ·
+      <a href="mailto:rcf@cruzrojacolombiana.org">rcf@cruzrojacolombiana.org</a>
+      ·
+      <a href="https://www.cruzrojacolombiana.org" target="_blank" rel="noopener">cruzrojacolombiana.org</a>
     </p>
     <p class="descargo">
       Directorio comunitario, no oficial. La información puede cambiar rápido.
@@ -26,6 +30,7 @@
   border-bottom: 3px solid var(--color-emergencia-borde);
 }
 
+.lineas-numeros,
 .linea-emergencia {
   margin: 0 0 4px;
 }

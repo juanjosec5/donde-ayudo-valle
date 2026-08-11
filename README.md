@@ -5,13 +5,11 @@ Directorio comunitario de puntos de acopio de donaciones tras el terremoto del 1
 cada punto. Solo lectura, sin backend ni base de datos: los datos viven en el repo como módulos
 TypeScript y se actualizan por Pull Request.
 
-## Pendiente antes de publicar
+## Estado de los datos
 
-- **Enlace de Cruz Roja Colombiana (RFL)**: el banner de emergencia y la página `/acerca`
-  tienen un enlace placeholder (`#TODO-cruzroja-rfl`). Reemplázalo por el enlace oficial de
-  Restablecimiento del Contacto Familiar antes de publicar el sitio.
-- **Datos de Buga**: `src/data/puntos/buga.ts` contiene puntos de **EJEMPLO** (nombre y
-  dirección prefijados). Reemplázalos por información verificada antes de publicar.
+Solo hay un punto verificado en `src/data/puntos/buga.ts` (Gimnasio Casa Estudio). Otros
+municipios/puntos se agregan a medida que se confirman direcciones — no publicar puntos sin
+verificar.
 
 ## Desarrollo local
 

@@ -16,6 +16,10 @@ const vencido = computed(() => esDatoVencido(props.punto.actualizado))
 function whatsappHref(valor: string) {
   return `https://wa.me/57${valor.replace(/\D/g, '')}`
 }
+
+function instagramHref(valor: string) {
+  return `https://instagram.com/${valor.replace(/^@/, '')}`
+}
 </script>
 
 <template>
@@ -46,6 +50,9 @@ function whatsappHref(valor: string) {
       <template v-for="(c, i) in punto.contactos" :key="i">
         <a v-if="c.tipo === 'whatsapp'" :href="whatsappHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
           WhatsApp
+        </a>
+        <a v-else-if="c.tipo === 'instagram'" :href="instagramHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
+          Instagram
         </a>
         <a v-else :href="`tel:${c.valor}`" class="btn btn-secundario">Llamar</a>
       </template>

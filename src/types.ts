@@ -17,8 +17,8 @@ export interface Necesidad {
 }
 
 export interface Contacto {
-  tipo: 'tel' | 'whatsapp'
-  valor: string // ej. "3160000000"
+  tipo: 'tel' | 'whatsapp' | 'instagram'
+  valor: string // ej. "3160000000" (tel/whatsapp) o "casaestudiobuga" (instagram, sin @)
 }
 
 export interface PuntoAcopio {

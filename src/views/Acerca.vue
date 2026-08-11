@@ -17,10 +17,15 @@
     <h2>Números oficiales</h2>
     <ul>
       <li>Emergencias nacionales: <strong>123</strong></li>
+      <li>Bomberos: <strong>119</strong></li>
+      <li>Cruz Roja: <strong>132</strong></li>
+      <li>Defensa Civil: <strong>144</strong></li>
+      <li>Movilidad: <strong>127</strong></li>
       <li>
-        Personas desaparecidas: Cruz Roja Colombiana – Restablecimiento del Contacto Familiar
-        <!-- TODO: confirmar enlace oficial de Cruz Roja Colombiana (RFL) antes de publicar -->
-        (<a href="#TODO-cruzroja-rfl" target="_blank" rel="noopener">enlace pendiente de confirmar</a>)
+        Personas desaparecidas: Cruz Roja Colombiana – Restablecimiento del Contacto Familiar —
+        <a href="https://wa.me/573212139525" target="_blank" rel="noopener">WhatsApp</a>,
+        <a href="mailto:rcf@cruzrojacolombiana.org">rcf@cruzrojacolombiana.org</a>,
+        <a href="https://www.cruzrojacolombiana.org" target="_blank" rel="noopener">cruzrojacolombiana.org</a>
       </li>
     </ul>
 
