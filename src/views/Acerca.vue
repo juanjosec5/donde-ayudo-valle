@@ -23,7 +23,6 @@
       <li>Movilidad: <strong>127</strong></li>
       <li>
         Personas desaparecidas: Cruz Roja Colombiana – Restablecimiento del Contacto Familiar —
-        <a href="https://wa.me/573212139525" target="_blank" rel="noopener">WhatsApp</a>,
         <a href="mailto:rcf@cruzrojacolombiana.org">rcf@cruzrojacolombiana.org</a>,
         <a href="https://www.cruzrojacolombiana.org" target="_blank" rel="noopener">cruzrojacolombiana.org</a>
       </li>

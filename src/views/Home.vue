@@ -6,7 +6,7 @@ import MunicipioList from '@/components/MunicipioList.vue'
 const busqueda = ref('')
 
 const municipiosFiltrados = computed(() => {
-  const items = municipiosConPuntos()
+  const items = municipiosConPuntos().filter((i) => i.total > 0)
   const q = busqueda.value.trim().toLowerCase()
   if (!q) return items
   return items.filter((i) => i.municipio.nombre.toLowerCase().includes(q))
