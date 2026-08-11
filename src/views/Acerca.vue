@@ -33,10 +33,23 @@
       </li>
     </ul>
 
-    <h2>¿Cómo aportar o corregir un punto?</h2>
+    <h2>¿Conoces un punto de acopio o quieres corregir uno?</h2>
     <p>
-      Los datos viven en el código del sitio, no en una base de datos. Para agregar o actualizar
-      un punto de acopio:
+      Cuéntanos: dirección, barrio, horario, contacto y qué necesita con más urgencia.
+    </p>
+    <a
+      href="https://docs.google.com/forms/d/e/1FAIpQLSfs-3P_U8HJc49bYZshCHPbUnExoRWtS_whB11XtF4XZ2OrSg/viewform?usp=header"
+      target="_blank"
+      rel="noopener"
+      class="btn-formulario"
+    >
+      Reportar un punto de acopio
+    </a>
+
+    <h2>¿Sabes de programación?</h2>
+    <p>
+      Los datos también viven en el código del sitio, no en una base de datos. Para agregar o
+      actualizar un punto de acopio directamente:
     </p>
     <ol>
       <li>Edita o crea el archivo <code>src/data/puntos/&lt;municipio&gt;.ts</code>.</li>
@@ -64,5 +77,23 @@
   background: var(--color-superficie);
   padding: 2px 6px;
   border-radius: 4px;
+}
+
+.btn-formulario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radio);
+  background: var(--color-acento);
+  color: var(--color-acento-texto);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--sombra-sm);
+}
+
+.btn-formulario:active {
+  box-shadow: none;
 }
 </style>
