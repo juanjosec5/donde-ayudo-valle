@@ -5,7 +5,8 @@ export type CategoriaItem =
   | 'bebes' // Bébés: pañales, fórmula
   | 'salud' // Salud y primeros auxilios
   | 'ropa' // Ropa y abrigo (cobijas)
-  | 'limpieza' // Herramientas y limpieza
+  | 'limpieza' // Aseo del hogar y limpieza
+  | 'construccion' // Herramientas, construcción y rescate
   | 'otros'
 
 export type Urgencia = 'alta' | 'media' | 'baja'
