@@ -52,24 +52,40 @@ function instagramHref(valor: string) {
           </span>
           <span class="nombre">{{ punto.nombre }}</span>
           <span v-if="punto.barrio" class="barrio">{{ punto.barrio }}</span>
-          <span class="direccion">{{ punto.direccion }}</span>
         </span>
         <span class="caret" aria-hidden="true">{{ abierto ? '▴' : '▾' }}</span>
       </button>
     </h2>
 
+    <a :href="mapsHref" target="_blank" rel="noopener" class="direccion-link">
+      {{ punto.direccion }}
+      <svg
+        class="icono-externo"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        <polyline points="15 3 21 3 21 9" />
+        <line x1="10" y1="14" x2="21" y2="3" />
+      </svg>
+    </a>
+
     <div :id="contentId" class="contenido-colapsable" :class="{ abierto }" role="region">
       <div class="contenido-colapsable-inner">
-        <div class="acciones">
-          <a :href="mapsHref" target="_blank" rel="noopener" class="btn">Cómo llegar</a>
+        <div v-if="punto.contactos.length" class="acciones">
           <template v-for="(c, i) in punto.contactos" :key="i">
-            <a v-if="c.tipo === 'whatsapp'" :href="whatsappHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
+            <a v-if="c.tipo === 'whatsapp'" :href="whatsappHref(c.valor)" target="_blank" rel="noopener" class="btn-contacto">
               Contacto
             </a>
-            <a v-else-if="c.tipo === 'instagram'" :href="instagramHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
+            <a v-else-if="c.tipo === 'instagram'" :href="instagramHref(c.valor)" target="_blank" rel="noopener" class="btn-contacto">
               Contacto
             </a>
-            <a v-else :href="`tel:${c.valor}`" class="btn btn-secundario">Llamar</a>
+            <a v-else :href="`tel:${c.valor}`" class="btn-contacto">Llamar</a>
           </template>
         </div>
 
@@ -93,7 +109,7 @@ function instagramHref(valor: string) {
 <style scoped>
 .punto-card {
   background: var(--color-superficie);
-  border: 1px solid var(--color-borde);
+  box-shadow: var(--sombra-sm);
   border-radius: var(--radio);
   padding: var(--espacio-md);
   margin-bottom: var(--espacio-md);
@@ -143,8 +159,24 @@ function instagramHref(valor: string) {
   font-size: 0.85rem;
 }
 
-.direccion {
+.direccion-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
   margin-top: 2px;
+  color: var(--color-acento);
+  text-decoration: none;
+}
+
+.direccion-link:active {
+  text-decoration: underline;
+}
+
+.icono-externo {
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
 }
 
 .caret {
@@ -225,25 +257,24 @@ function instagramHref(valor: string) {
   color: var(--color-texto-tenue);
 }
 
-.btn {
-  min-height: 44px;
+.btn-contacto {
+  min-height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0 16px;
-  border-radius: var(--radio);
-  background: var(--color-acento);
-  color: var(--color-acento-texto);
+  border-radius: 999px;
+  background: var(--color-acento-suave);
+  color: var(--color-acento);
   text-decoration: none;
   font-weight: 600;
-  flex: 1 1 auto;
+  font-size: 0.9rem;
+  flex: 0 0 auto;
   text-align: center;
 }
 
-.btn-secundario {
-  background: transparent;
-  border: 1px solid var(--color-acento);
-  color: var(--color-acento);
+.btn-contacto:active {
+  background: color-mix(in srgb, var(--color-acento) 15%, var(--color-acento-suave));
 }
 
 .vencido {

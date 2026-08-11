@@ -50,8 +50,7 @@ const puntos = computed(() => puntosPorMunicipio(slug.value))
 }
 
 .aviso-voluntarios {
-  background: color-mix(in srgb, var(--color-acento) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-acento) 30%, transparent);
+  background: var(--color-acento-suave);
   border-radius: var(--radio);
   padding: var(--espacio-md);
   margin: var(--espacio-md) 0;

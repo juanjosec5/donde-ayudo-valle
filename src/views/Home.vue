@@ -15,6 +15,7 @@ const municipiosFiltrados = computed(() => {
 
 <template>
   <section>
+    <div class="hero-accent" aria-hidden="true"></div>
     <h1>Puntos de acopio — Valle del Cauca</h1>
     <p class="intro">
       Directorio comunitario de dónde se están recibiendo donaciones y qué se necesita en cada
@@ -42,14 +43,21 @@ const municipiosFiltrados = computed(() => {
 </template>
 
 <style scoped>
+.hero-accent {
+  width: 48px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-acento), var(--color-destaque));
+  margin-bottom: var(--espacio-sm);
+}
+
 .intro {
   color: var(--color-texto-tenue);
   margin-top: 0;
 }
 
 .descargo-independencia {
-  background: color-mix(in srgb, var(--color-acento) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-acento) 30%, transparent);
+  background: var(--color-acento-suave);
   border-radius: var(--radio);
   padding: var(--espacio-sm) var(--espacio-md);
   font-size: 0.85rem;
@@ -69,5 +77,15 @@ const municipiosFiltrados = computed(() => {
   background: var(--color-superficie);
   color: var(--color-texto);
   font-size: 1rem;
+  box-shadow: var(--sombra-sm);
+  transition:
+    box-shadow 150ms ease,
+    border-color 150ms ease;
+}
+
+.buscador input:focus {
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px var(--color-acento-suave);
 }
 </style>
