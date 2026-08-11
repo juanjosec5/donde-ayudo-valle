@@ -30,10 +30,12 @@ export function puntosPorMunicipio(slug: string): PuntoAcopio[] {
 }
 
 export function municipiosConPuntos(): { municipio: Municipio; total: number }[] {
-  return municipios.map((municipio) => ({
-    municipio,
-    total: puntos.filter((p) => p.municipioSlug === municipio.slug && p.activo).length,
-  }))
+  return municipios
+    .map((municipio) => ({
+      municipio,
+      total: puntos.filter((p) => p.municipioSlug === municipio.slug && p.activo).length,
+    }))
+    .sort((a, b) => b.total - a.total)
 }
 
 export { municipios }
