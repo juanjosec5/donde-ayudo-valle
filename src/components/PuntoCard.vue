@@ -45,6 +45,11 @@ function instagramHref(valor: string) {
         @click="abierto = !abierto"
       >
         <span class="encabezado-texto">
+          <span class="eyebrow">
+            <span :class="{ vencido }">Actualizado {{ relativeTime(punto.actualizado) }}</span>
+            <span v-if="punto.verificadoPor"> · Verificado por {{ punto.verificadoPor }}</span>
+            <span v-if="vencido" class="badge-vencido">Sin actualizar — confirma antes de ir</span>
+          </span>
           <span class="nombre">{{ punto.nombre }}</span>
           <span v-if="punto.barrio" class="barrio">{{ punto.barrio }}</span>
           <span class="direccion">{{ punto.direccion }}</span>
@@ -55,10 +60,24 @@ function instagramHref(valor: string) {
 
     <div :id="contentId" class="contenido-colapsable" :class="{ abierto }" role="region">
       <div class="contenido-colapsable-inner">
+        <div class="acciones">
+          <a :href="mapsHref" target="_blank" rel="noopener" class="btn">Cómo llegar</a>
+          <template v-for="(c, i) in punto.contactos" :key="i">
+            <a v-if="c.tipo === 'whatsapp'" :href="whatsappHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
+              Contacto
+            </a>
+            <a v-else-if="c.tipo === 'instagram'" :href="instagramHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
+              Contacto
+            </a>
+            <a v-else :href="`tel:${c.valor}`" class="btn btn-secundario">Llamar</a>
+          </template>
+        </div>
+
         <p class="horario">Horario: {{ punto.horario }}</p>
 
         <ul class="necesita">
-          <li v-for="(n, i) in necesidadesOrdenadas" :key="i" :class="`urgencia-${n.urgencia}`">
+          <li v-for="(n, i) in necesidadesOrdenadas" :key="i" :class="{ critico: n.urgencia === 'alta' }">
+            <span v-if="n.urgencia === 'alta'" class="etiqueta-critico">Urgente</span>
             <span class="descripcion">{{ n.descripcion }}</span>
           </li>
         </ul>
@@ -66,25 +85,6 @@ function instagramHref(valor: string) {
         <p v-if="punto.noNecesita?.length" class="no-necesita">
           No llevar: {{ punto.noNecesita.join(', ') }}
         </p>
-
-        <div class="acciones">
-          <a :href="mapsHref" target="_blank" rel="noopener" class="btn">Cómo llegar</a>
-          <template v-for="(c, i) in punto.contactos" :key="i">
-            <a v-if="c.tipo === 'whatsapp'" :href="whatsappHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
-              WhatsApp
-            </a>
-            <a v-else-if="c.tipo === 'instagram'" :href="instagramHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
-              Instagram
-            </a>
-            <a v-else :href="`tel:${c.valor}`" class="btn btn-secundario">Llamar</a>
-          </template>
-        </div>
-
-        <footer>
-          <span :class="{ vencido }">Actualizado {{ relativeTime(punto.actualizado) }}</span>
-          <span v-if="punto.verificadoPor"> · Verificado por {{ punto.verificadoPor }}</span>
-          <span v-if="vencido" class="badge-vencido">Sin actualizar — confirma antes de ir</span>
-        </footer>
       </div>
     </div>
   </article>
@@ -120,6 +120,16 @@ function instagramHref(valor: string) {
 .encabezado-texto {
   display: flex;
   flex-direction: column;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  color: var(--color-texto-tenue);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  align-items: center;
+  margin-bottom: 2px;
 }
 
 .nombre {
@@ -163,8 +173,15 @@ function instagramHref(valor: string) {
   }
 }
 
-.horario {
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-sm);
   margin: var(--espacio-sm) 0 0;
+}
+
+.horario {
+  margin: var(--espacio-md) 0 0;
 }
 
 .necesita {
@@ -178,38 +195,34 @@ function instagramHref(valor: string) {
 
 .necesita li {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
   padding: 6px 10px;
   border-radius: var(--radio);
-  border-left: 4px solid transparent;
+  background: var(--color-superficie-activa);
+  border-left: 4px solid var(--color-borde);
 }
 
-.necesita li.urgencia-alta {
-  background: color-mix(in srgb, var(--urg-alta) 12%, transparent);
+.necesita li.critico {
+  background: color-mix(in srgb, var(--urg-alta) 10%, transparent);
   border-left-color: var(--urg-alta);
 }
 
-.necesita li.urgencia-media {
-  background: color-mix(in srgb, var(--urg-media) 12%, transparent);
-  border-left-color: var(--urg-media);
-}
-
-.necesita li.urgencia-baja {
-  background: color-mix(in srgb, var(--urg-baja) 12%, transparent);
-  border-left-color: var(--urg-baja);
+.etiqueta-critico {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #fff;
+  background: var(--urg-alta);
+  padding: 2px 8px;
+  border-radius: 999px;
 }
 
 .no-necesita {
   font-size: 0.85rem;
   color: var(--color-texto-tenue);
-}
-
-.acciones {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--espacio-sm);
-  margin: var(--espacio-sm) 0;
 }
 
 .btn {
@@ -231,15 +244,6 @@ function instagramHref(valor: string) {
   background: transparent;
   border: 1px solid var(--color-acento);
   color: var(--color-acento);
-}
-
-footer {
-  font-size: 0.8rem;
-  color: var(--color-texto-tenue);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 8px;
-  align-items: center;
 }
 
 .vencido {
