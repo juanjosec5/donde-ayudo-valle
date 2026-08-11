@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import type { PuntoAcopio } from '@/types'
 import { relativeTime, esDatoVencido } from '@/utils/relativeTime'
+import { municipios } from '@/data'
 
 const props = defineProps<{ punto: PuntoAcopio }>()
 
@@ -12,6 +13,13 @@ const necesidadesOrdenadas = computed(() =>
 )
 
 const vencido = computed(() => esDatoVencido(props.punto.actualizado))
+
+const mapsHref = computed(() => {
+  if (props.punto.mapsUrl) return props.punto.mapsUrl
+  const nombreMunicipio = municipios.find((m) => m.slug === props.punto.municipioSlug)?.nombre
+  const query = [props.punto.direccion, nombreMunicipio, 'Colombia'].filter(Boolean).join(', ')
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
+})
 
 function whatsappHref(valor: string) {
   return `https://wa.me/57${valor.replace(/\D/g, '')}`
@@ -34,7 +42,6 @@ function instagramHref(valor: string) {
 
     <ul class="necesita">
       <li v-for="(n, i) in necesidadesOrdenadas" :key="i" :class="`urgencia-${n.urgencia}`">
-        <span class="etiqueta-urgencia">{{ n.urgencia }}</span>
         <span class="descripcion">{{ n.descripcion }}</span>
       </li>
     </ul>
@@ -44,9 +51,7 @@ function instagramHref(valor: string) {
     </p>
 
     <div class="acciones">
-      <a v-if="punto.mapsUrl" :href="punto.mapsUrl" target="_blank" rel="noopener" class="btn">
-        Cómo llegar
-      </a>
+      <a :href="mapsHref" target="_blank" rel="noopener" class="btn">Cómo llegar</a>
       <template v-for="(c, i) in punto.contactos" :key="i">
         <a v-if="c.tipo === 'whatsapp'" :href="whatsappHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
           WhatsApp
@@ -122,14 +127,6 @@ function instagramHref(valor: string) {
 .necesita li.urgencia-baja {
   background: color-mix(in srgb, var(--urg-baja) 12%, transparent);
   border-left-color: var(--urg-baja);
-}
-
-.etiqueta-urgencia {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  opacity: 0.75;
 }
 
 .no-necesita {
