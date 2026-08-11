@@ -9,4 +9,5 @@ export const municipios: Municipio[] = [
   { slug: 'cartago', nombre: 'Cartago' },
   { slug: 'sevilla', nombre: 'Sevilla' },
   { slug: 'roldanillo', nombre: 'Roldanillo' },
+  { slug: 'zarzal', nombre: 'Zarzal' },
 ]
