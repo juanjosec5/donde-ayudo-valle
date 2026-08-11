@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, useId } from 'vue'
 import type { PuntoAcopio } from '@/types'
 import { relativeTime, esDatoVencido } from '@/utils/relativeTime'
 import { municipios } from '@/data'
 
 const props = defineProps<{ punto: PuntoAcopio }>()
+
+const abierto = ref(false)
+const baseId = useId()
+const contentId = `${baseId}-contenido`
 
 const ordenUrgencia: Record<string, number> = { alta: 0, media: 1, baja: 2 }
 
@@ -32,42 +36,57 @@ function instagramHref(valor: string) {
 
 <template>
   <article v-if="punto.activo" class="punto-card">
-    <header>
-      <h2>{{ punto.nombre }}</h2>
-      <p v-if="punto.barrio" class="barrio">{{ punto.barrio }}</p>
-    </header>
+    <h2 class="titulo-punto">
+      <button
+        type="button"
+        class="encabezado-punto"
+        :aria-expanded="abierto"
+        :aria-controls="contentId"
+        @click="abierto = !abierto"
+      >
+        <span class="encabezado-texto">
+          <span class="nombre">{{ punto.nombre }}</span>
+          <span v-if="punto.barrio" class="barrio">{{ punto.barrio }}</span>
+          <span class="direccion">{{ punto.direccion }}</span>
+        </span>
+        <span class="caret" aria-hidden="true">{{ abierto ? '▴' : '▾' }}</span>
+      </button>
+    </h2>
 
-    <p class="direccion">{{ punto.direccion }}</p>
-    <p class="horario">Horario: {{ punto.horario }}</p>
+    <div :id="contentId" class="contenido-colapsable" :class="{ abierto }" role="region">
+      <div class="contenido-colapsable-inner">
+        <p class="horario">Horario: {{ punto.horario }}</p>
 
-    <ul class="necesita">
-      <li v-for="(n, i) in necesidadesOrdenadas" :key="i" :class="`urgencia-${n.urgencia}`">
-        <span class="descripcion">{{ n.descripcion }}</span>
-      </li>
-    </ul>
+        <ul class="necesita">
+          <li v-for="(n, i) in necesidadesOrdenadas" :key="i" :class="`urgencia-${n.urgencia}`">
+            <span class="descripcion">{{ n.descripcion }}</span>
+          </li>
+        </ul>
 
-    <p v-if="punto.noNecesita?.length" class="no-necesita">
-      No llevar: {{ punto.noNecesita.join(', ') }}
-    </p>
+        <p v-if="punto.noNecesita?.length" class="no-necesita">
+          No llevar: {{ punto.noNecesita.join(', ') }}
+        </p>
 
-    <div class="acciones">
-      <a :href="mapsHref" target="_blank" rel="noopener" class="btn">Cómo llegar</a>
-      <template v-for="(c, i) in punto.contactos" :key="i">
-        <a v-if="c.tipo === 'whatsapp'" :href="whatsappHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
-          WhatsApp
-        </a>
-        <a v-else-if="c.tipo === 'instagram'" :href="instagramHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
-          Instagram
-        </a>
-        <a v-else :href="`tel:${c.valor}`" class="btn btn-secundario">Llamar</a>
-      </template>
+        <div class="acciones">
+          <a :href="mapsHref" target="_blank" rel="noopener" class="btn">Cómo llegar</a>
+          <template v-for="(c, i) in punto.contactos" :key="i">
+            <a v-if="c.tipo === 'whatsapp'" :href="whatsappHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
+              WhatsApp
+            </a>
+            <a v-else-if="c.tipo === 'instagram'" :href="instagramHref(c.valor)" target="_blank" rel="noopener" class="btn btn-secundario">
+              Instagram
+            </a>
+            <a v-else :href="`tel:${c.valor}`" class="btn btn-secundario">Llamar</a>
+          </template>
+        </div>
+
+        <footer>
+          <span :class="{ vencido }">Actualizado {{ relativeTime(punto.actualizado) }}</span>
+          <span v-if="punto.verificadoPor"> · Verificado por {{ punto.verificadoPor }}</span>
+          <span v-if="vencido" class="badge-vencido">Sin actualizar — confirma antes de ir</span>
+        </footer>
+      </div>
     </div>
-
-    <footer>
-      <span :class="{ vencido }">Actualizado {{ relativeTime(punto.actualizado) }}</span>
-      <span v-if="punto.verificadoPor"> · Verificado por {{ punto.verificadoPor }}</span>
-      <span v-if="vencido" class="badge-vencido">Sin actualizar — confirma antes de ir</span>
-    </footer>
   </article>
 </template>
 
@@ -80,20 +99,72 @@ function instagramHref(valor: string) {
   margin-bottom: var(--espacio-md);
 }
 
-.punto-card header h2 {
+.titulo-punto {
   margin: 0;
+}
+
+.encabezado-punto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-sm);
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+  text-align: left;
+  color: inherit;
+}
+
+.encabezado-texto {
+  display: flex;
+  flex-direction: column;
+}
+
+.nombre {
+  font-weight: 600;
   font-size: 1.1rem;
 }
 
 .barrio {
-  margin: 2px 0 0;
+  margin-top: 2px;
   color: var(--color-texto-tenue);
   font-size: 0.85rem;
 }
 
-.direccion,
+.direccion {
+  margin-top: 2px;
+}
+
+.caret {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  color: var(--color-texto-tenue);
+}
+
+.contenido-colapsable {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 200ms ease;
+}
+
+.contenido-colapsable.abierto {
+  grid-template-rows: 1fr;
+}
+
+.contenido-colapsable-inner {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contenido-colapsable {
+    transition: none;
+  }
+}
+
 .horario {
-  margin: var(--espacio-xs) 0;
+  margin: var(--espacio-sm) 0 0;
 }
 
 .necesita {
