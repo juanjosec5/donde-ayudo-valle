@@ -1,24 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { puntosPorMunicipio, municipios } from '@/data'
 import { avisoVoluntarios } from '@/data/avisoVoluntarios'
 import PuntoCard from '@/components/PuntoCard.vue'
-import CategoriaFiltro from '@/components/CategoriaFiltro.vue'
-import type { CategoriaItem } from '@/types'
 
 const route = useRoute()
 const slug = computed(() => route.params.municipioSlug as string)
 const municipio = computed(() => municipios.find((m) => m.slug === slug.value))
 
-const categoriaActiva = ref<CategoriaItem | null>(null)
-
 const puntos = computed(() => puntosPorMunicipio(slug.value))
-
-const puntosFiltrados = computed(() => {
-  if (!categoriaActiva.value) return puntos.value
-  return puntos.value.filter((p) => p.necesita.some((n) => n.categoria === categoriaActiva.value))
-})
 </script>
 
 <template>
@@ -33,10 +24,8 @@ const puntosFiltrados = computed(() => {
       </ul>
     </div>
 
-    <CategoriaFiltro v-model="categoriaActiva" />
-
-    <div v-if="puntosFiltrados.length">
-      <PuntoCard v-for="punto in puntosFiltrados" :key="punto.id" :punto="punto" />
+    <div v-if="puntos.length">
+      <PuntoCard v-for="punto in puntos" :key="punto.id" :punto="punto" />
     </div>
     <p v-else class="estado-vacio">
       Aún no hay puntos registrados en este municipio.
