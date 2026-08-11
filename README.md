@@ -35,13 +35,13 @@ npm run preview  # sirve el build de producción localmente
    `src/data/index.ts`.
 3. Abre un Pull Request con el cambio. No se toca ningún componente para agregar datos.
 
-El "Actualizado hace…" que se muestra en cada tarjeta se calcula automáticamente a partir de
-la fecha del último commit que tocó el archivo `src/data/puntos/<municipio>.ts` (no hay que
-editar el campo `actualizado` a mano). Para que esto funcione en Vercel, activa **Deep Clone**
-en la configuración de Git del proyecto (o define la variable de entorno `VERCEL_DEEP_CLONE=1`):
-por defecto Vercel hace un clone superficial (`--depth=10`) que puede no alcanzar el commit
-real si el archivo lleva más de 10 commits sin tocarse. Si el historial de git no está
-disponible, se usa como respaldo la fecha declarada en el propio punto.
+No edites el campo `actualizado` a mano: un hook de pre-commit
+(`scripts/stamp-actualizado.js`) lo estampa automáticamente con la fecha/hora real cada vez
+que haces commit de un archivo modificado en `src/data/puntos/`. `npm install` configura el
+hook (`git config core.hooksPath .githooks` vía el script `prepare`). Esto reemplaza un
+enfoque anterior que derivaba la fecha desde el historial de git en build time — poco fiable
+en Vercel, que por defecto hace un clone superficial (`--depth=10`) y puede no alcanzar el
+commit real de un archivo que lleva un tiempo sin tocarse.
 
 ## Deploy en Vercel
 
