@@ -6,7 +6,12 @@
     <h1>Acerca de este directorio</h1>
     <p>
       Este sitio es una guía comunitaria de puntos de acopio de donaciones tras el terremoto del
-      10 de agosto de 2026 en el Valle del Cauca. No es un canal oficial.
+      10 de agosto de 2026 en el Valle del Cauca.
+    </p>
+    <p class="descargo-independencia">
+      Este es un proyecto <strong>independiente y voluntario, creado por un ciudadano</strong>.
+      No tiene relación directa con la Alcaldía, la Gobernación, ninguna entidad gubernamental,
+      ONG, fundación u organización sin ánimo de lucro. No es un canal oficial.
     </p>
     <p>
       La información es aportada y mantenida por voluntarios. Puede cambiar rápido o estar

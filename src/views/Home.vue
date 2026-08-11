@@ -21,6 +21,12 @@ const municipiosFiltrados = computed(() => {
       punto.
     </p>
 
+    <p class="descargo-independencia">
+      Proyecto <strong>independiente y voluntario, creado por un ciudadano</strong>. No tiene
+      relación con ninguna entidad gubernamental, ONG, fundación u organización sin ánimo de
+      lucro.
+    </p>
+
     <label class="buscador">
       <span class="sr-only">Buscar municipio</span>
       <input
@@ -39,6 +45,14 @@ const municipiosFiltrados = computed(() => {
 .intro {
   color: var(--color-texto-tenue);
   margin-top: 0;
+}
+
+.descargo-independencia {
+  background: color-mix(in srgb, var(--color-acento) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-acento) 30%, transparent);
+  border-radius: var(--radio);
+  padding: var(--espacio-sm) var(--espacio-md);
+  font-size: 0.85rem;
 }
 
 .buscador {
