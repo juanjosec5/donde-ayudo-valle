@@ -7,9 +7,8 @@ import { comunidadApps } from '@/data/comunidadApps'
     <RouterLink to="/" class="volver">← Inicio</RouterLink>
     <h1>Otras iniciativas de la comunidad</h1>
     <p class="intro">
-      Amigos cercanos y otros desarrolladores han construido herramientas independientes para
-      ayudar en esta emergencia. No forman parte de este sitio — cada una se administra por su
-      cuenta.
+      Amigos cercanos y otros desarrolladores crearon estas herramientas por su cuenta para
+      apoyar la respuesta a la emergencia. Explóralas y compártelas — cada iniciativa suma.
     </p>
 
     <ul class="lista-apps">
