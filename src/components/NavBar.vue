@@ -4,7 +4,10 @@
   <nav class="nav">
     <div class="nav-inner">
       <RouterLink to="/" class="nav-brand">Donde Ayudo · Valle</RouterLink>
-      <RouterLink to="/acerca" class="nav-link">Acerca / Aportar</RouterLink>
+      <div class="nav-links">
+        <RouterLink to="/comunidad" class="nav-link">Comunidad</RouterLink>
+        <RouterLink to="/acerca" class="nav-link">Acerca / Aportar</RouterLink>
+      </div>
     </div>
   </nav>
 </template>
@@ -34,6 +37,15 @@
   text-decoration: none;
   font-weight: 700;
   font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-md);
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .nav-link {
