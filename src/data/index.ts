@@ -20,6 +20,8 @@ import { monteria } from './puntos/monteria'
 import { medellin } from './puntos/medellin'
 import { bugalagrande } from './puntos/bugalagrande'
 import { chia } from './puntos/chia'
+import { yumbo } from './puntos/yumbo'
+import { restrepo } from './puntos/restrepo'
 
 // "actualizado" se estampa con la fecha/hora real por un hook pre-commit
 // (scripts/stamp-actualizado.js) cada vez que se modifica un archivo de
@@ -45,6 +47,8 @@ export const puntos: PuntoAcopio[] = [
   ...medellin,
   ...bugalagrande,
   ...chia,
+  ...yumbo,
+  ...restrepo,
 ]
 
 export function puntosPorMunicipio(slug: string): PuntoAcopio[] {
