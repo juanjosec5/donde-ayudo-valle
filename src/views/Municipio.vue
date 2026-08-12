@@ -3,7 +3,9 @@ import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { puntosPorMunicipio, municipios } from '@/data'
 import { avisoVoluntarios } from '@/data/avisoVoluntarios'
+import { necesidadesGenericas } from '@/data/necesidadesGenericas'
 import PuntoCard from '@/components/PuntoCard.vue'
+import ListaNecesidades from '@/components/ListaNecesidades.vue'
 
 const route = useRoute()
 const slug = computed(() => route.params.municipioSlug as string)
@@ -35,6 +37,14 @@ const puntosFiltrados = computed(() => {
       <ul>
         <li v-for="(linea, i) in avisoVoluntarios" :key="i">{{ linea }}</li>
       </ul>
+    </div>
+
+    <div v-if="puntos.length" class="necesidades-generales">
+      <p class="necesidades-generales-titulo">Lo que la mayoría de los puntos necesita</p>
+      <p class="necesidades-generales-nota">
+        Los puntos que aún no tienen información específica piden esto por defecto.
+      </p>
+      <ListaNecesidades :necesidades="necesidadesGenericas" />
     </div>
 
     <label v-if="puntos.length" class="buscador">
@@ -94,6 +104,25 @@ const puntosFiltrados = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.necesidades-generales {
+  background: var(--color-superficie);
+  box-shadow: var(--sombra-sm);
+  border-radius: var(--radio);
+  padding: var(--espacio-md);
+  margin: var(--espacio-md) 0;
+}
+
+.necesidades-generales-titulo {
+  margin: 0;
+  font-weight: 700;
+}
+
+.necesidades-generales-nota {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--color-texto-tenue);
 }
 
 .buscador {
