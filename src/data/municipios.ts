@@ -22,4 +22,5 @@ export const municipios: Municipio[] = [
   { slug: 'monteria', nombre: 'Montería' },
   { slug: 'medellin', nombre: 'Medellín' },
   { slug: 'bugalagrande', nombre: 'Bugalagrande' },
+  { slug: 'chia', nombre: 'Chía' },
 ]
