@@ -15,4 +15,10 @@ export const municipios: Municipio[] = [
   { slug: 'bogota', nombre: 'Bogotá' },
   { slug: 'trujillo', nombre: 'Trujillo' },
   { slug: 'cajica', nombre: 'Cajicá' },
+  { slug: 'quibdo', nombre: 'Quibdó' },
+  { slug: 'santa-marta', nombre: 'Santa Marta' },
+  { slug: 'manizales', nombre: 'Manizales' },
+  { slug: 'barranquilla', nombre: 'Barranquilla' },
+  { slug: 'monteria', nombre: 'Montería' },
+  { slug: 'medellin', nombre: 'Medellín' },
 ]

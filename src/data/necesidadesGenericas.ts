@@ -3,8 +3,8 @@ import type { Necesidad } from '@/types'
 // Lista base de ítems para puntos que reciben de todo. Se tomó como
 // referencia lo solicitado en el punto de Cali (Plazoleta Jairo Varela).
 export const necesidadesGenericas: Necesidad[] = [
-  { categoria: 'agua', descripcion: 'Agua potable', urgencia: 'media' },
-  { categoria: 'agua', descripcion: 'Bebidas hidratantes', urgencia: 'media' },
+  { categoria: 'agua', descripcion: 'Agua potable', urgencia: 'alta' },
+  { categoria: 'agua', descripcion: 'Bebidas hidratantes', urgencia: 'alta' },
   { categoria: 'alimentos', descripcion: 'Comida preparada y alimentos no perecederos', urgencia: 'media' },
   { categoria: 'alimentos', descripcion: 'Dulces', urgencia: 'media' },
   { categoria: 'ropa', descripcion: 'Colchonetas', urgencia: 'media' },
