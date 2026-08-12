@@ -30,8 +30,16 @@ const municipiosFiltrados = computed(() => {
     </p>
 
     <a :href="FORMULARIO_URL" target="_blank" rel="noopener" class="link-reportar">
-      ¿Conoces un punto de acopio? Repórtalo aquí →
+      <span class="link-reportar-titulo">¿Conoces un punto de acopio?</span>
+      <span class="link-reportar-texto">Repórtalo aquí →</span>
     </a>
+
+    <RouterLink to="/comunidad" class="tarjeta-comunidad">
+      <span class="tarjeta-comunidad-titulo">Más formas de ayudar</span>
+      <span class="tarjeta-comunidad-texto">
+        Otras herramientas creadas por la comunidad para apoyar la emergencia →
+      </span>
+    </RouterLink>
 
     <label class="buscador">
       <span class="sr-only">Buscar municipio</span>
@@ -69,13 +77,49 @@ const municipiosFiltrados = computed(() => {
 }
 
 .link-reportar {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
+  display: block;
   margin-top: var(--espacio-sm);
-  color: var(--color-acento);
-  font-weight: 600;
+  padding: var(--espacio-sm) var(--espacio-md);
+  border-radius: var(--radio);
+  background: var(--color-acento-suave);
   text-decoration: none;
+  color: var(--color-texto);
+}
+
+.link-reportar-titulo {
+  display: block;
+  font-weight: 700;
+  color: var(--color-acento);
+}
+
+.link-reportar-texto {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-texto-tenue);
+  margin-top: 2px;
+}
+
+.tarjeta-comunidad {
+  display: block;
+  margin-top: var(--espacio-md);
+  padding: var(--espacio-sm) var(--espacio-md);
+  border-radius: var(--radio);
+  background: var(--color-destaque-suave);
+  text-decoration: none;
+  color: var(--color-texto);
+}
+
+.tarjeta-comunidad-titulo {
+  display: block;
+  font-weight: 700;
+  color: var(--color-destaque);
+}
+
+.tarjeta-comunidad-texto {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-texto-tenue);
+  margin-top: 2px;
 }
 
 .buscador {

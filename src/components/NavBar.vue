@@ -43,7 +43,7 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: var(--espacio-md);
+  gap: var(--espacio-lg);
   flex-wrap: wrap;
   justify-content: flex-end;
 }
