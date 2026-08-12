@@ -3,6 +3,8 @@ import { computed, ref, useId } from 'vue'
 import type { PuntoAcopio } from '@/types'
 import { relativeTime, esDatoVencido } from '@/utils/relativeTime'
 import { municipios } from '@/data'
+import { necesidadesGenericas } from '@/data/necesidadesGenericas'
+import ListaNecesidades from './ListaNecesidades.vue'
 
 const props = defineProps<{ punto: PuntoAcopio }>()
 
@@ -10,11 +12,7 @@ const abierto = ref(false)
 const baseId = useId()
 const contentId = `${baseId}-contenido`
 
-const ordenUrgencia: Record<string, number> = { alta: 0, media: 1, baja: 2 }
-
-const necesidadesOrdenadas = computed(() =>
-  [...props.punto.necesita].sort((a, b) => ordenUrgencia[a.urgencia] - ordenUrgencia[b.urgencia]),
-)
+const esGenerico = computed(() => props.punto.necesita === necesidadesGenericas)
 
 const vencido = computed(() => esDatoVencido(props.punto.actualizado))
 
@@ -91,12 +89,10 @@ function instagramHref(valor: string) {
 
         <p class="horario">Horario: {{ punto.horario }}</p>
 
-        <ul class="necesita">
-          <li v-for="(n, i) in necesidadesOrdenadas" :key="i" :class="{ critico: n.urgencia === 'alta' }">
-            <span v-if="n.urgencia === 'alta'" class="etiqueta-critico">Urgente</span>
-            <span class="descripcion">{{ n.descripcion }}</span>
-          </li>
-        </ul>
+        <p v-if="esGenerico" class="necesita-generico">
+          Necesita lo básico (ver la lista general arriba)
+        </p>
+        <ListaNecesidades v-else :necesidades="punto.necesita" />
 
         <p v-if="punto.noNecesita?.length" class="no-necesita">
           No llevar: {{ punto.noNecesita.join(', ') }}
@@ -216,40 +212,11 @@ function instagramHref(valor: string) {
   margin: var(--espacio-md) 0 0;
 }
 
-.necesita {
-  list-style: none;
+.necesita-generico {
   margin: var(--espacio-sm) 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.necesita li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  border-radius: var(--radio);
-  background: var(--color-superficie-activa);
-  border-left: 4px solid var(--color-borde);
-}
-
-.necesita li.critico {
-  background: color-mix(in srgb, var(--urg-alta) 10%, transparent);
-  border-left-color: var(--urg-alta);
-}
-
-.etiqueta-critico {
-  flex-shrink: 0;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: #fff;
-  background: var(--urg-alta);
-  padding: 2px 8px;
-  border-radius: 999px;
+  color: var(--color-texto-tenue);
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 .no-necesita {
