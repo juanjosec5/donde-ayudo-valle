@@ -53,6 +53,12 @@ import { FORMULARIO_URL } from '@/data/formularioUrl'
       <li>Si es un municipio nuevo, agrégalo también en <code>src/data/municipios.ts</code>.</li>
       <li>Abre un Pull Request con el cambio.</li>
     </ol>
+    <p>
+      Repositorio en GitHub:
+      <a href="https://github.com/juanjosec5/donde-ayudo-valle" target="_blank" rel="noopener">
+        github.com/juanjosec5/donde-ayudo-valle
+      </a>
+    </p>
   </section>
 </template>
 
